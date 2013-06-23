@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Список Постов{% endblock %}
+{% block content %}
+  {% if posts %}
+    <h2>All posts</h2>
+    {{ posts|length}} on this page
+    <hr>
+    {% for post in posts %}
+      {% include 'blog/post_snippet.html' %}
+    {% endfor %}
+  {% else %}
+    <h2>There are no posts yet.</h2>
+  {% endif %}
+
+  <hr>
+  <div class="pagination">
+    {% if page_obj.paginator.num_pages > 1 %}
+      {% if page_obj.has_previous %}
+        <a href="{% url 'blog:post_list_view' page_obj.previous_page_number %}">&larr;</a>
+      {% endif %}
+      <span class="current_page">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}
+       <a href="{% url 'blog:post_list_view' page_obj.next_page_number %}">&rarr;</a>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock %}

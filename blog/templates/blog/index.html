@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}Posts Main Page{% endblock %}
+{% block content %}
+  <div class="welcome"><h2>Welcome to HotDot TestBlog!</h2></div>
+  <div class="tag_search">
+    Use tag search:
+    <form action="{% url 'blog:tag_search_view' %}" method="get">
+      {{ form.as_table }}
+      <input type="submit" value="Search">
+    </form>
+  </div>
+
+  <hr>
+  {% for post in latest_post_list %}
+    {% include 'blog/post_snippet.html' %}
+  {% endfor %}
+{% endblock %}

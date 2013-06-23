@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}Tag Search{% endblock %}
+{% block content %}
+  {% if tagged_post_list %}
+    <div class="tag_info"><h3>{{ tagged_post_list|length|apnumber|capfirst }} post{{ tagged_post_list|pluralize }} found for `{{ tag }}` tag.</h3></div>
+    {% for post in tagged_post_list %}
+      {% include 'blog/post_snippet.html' %}
+    {% endfor %}
+  {% else %}
+    <div class="tag_info">Нет постов с тегом `{{ tag }}`</div>
+  {% endif %}
+{% endblock %}
